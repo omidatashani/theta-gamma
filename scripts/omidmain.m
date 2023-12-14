@@ -8,10 +8,6 @@ load('/Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/HPC_100_CH18_0.continuo
 load('/Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/PFC_100_CH22_0.continuous.mat')
 load("/Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/2021-06-03_13-38-14_posttrial5-states_SM.mat")
 %%
-% load /Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/2021-06-03_13-34-04_posttrial5/HPC_100_CH18_0.continuous.mat
-% load /Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/2021-06-03_13-34-04_posttrial5/PFC_100_CH22_0.continuous.mat
-% load /Users/omid/Desktop/2021-06-03_13-38-14_posttrial5/2021-06-03_13-34-04_posttrial5/2021-06-03_13-34-04_posttrial5-states_ES2.mat
-%%
 samplingRate = 2500;
 [HPClfpCleaned,HPCnoisyInds] = removeArtefacts(HPC,samplingRate,[4 8], ...
     [1 0.1]);
@@ -373,39 +369,39 @@ for i = 1:length(PPC)
     title(['Pairwise Phase Consistency for REM trial ' num2str(i) ' (my function)']);
 end
 %%
-% ppc2 = PPC{1}+ PPC{2};
-% ppc2=ppc2/2;
-% h = pcolor(x_labels, f, ppc2');
-% h.EdgeColor = 'none';
-% shading interp;  % Interpolate grid for smoother color
-% colorbar;
-% xlabel('HPC Theta Phase (radians)');
-% ylabel('PFC Frequency (Hz)');
-% title(['Pairwise Phase Consistency averaged in trials (my function)']);
+ppc2 = PPC{1}+ PPC{2};
+ppc2=ppc2/2;
+h = pcolor(x_labels, f, ppc2');
+h.EdgeColor = 'none';
+shading interp;  % Interpolate grid for smoother color
+colorbar;
+xlabel('HPC Theta Phase (radians)');
+ylabel('PFC Frequency (Hz)');
+title(['Pairwise Phase Consistency averaged in trials (my function)']);
 %%
-% inds = [1:7, 18:20];
-% PPC_matrix = [];
-% for i = 1:length(PPC)
-%     PPC_matrix = [PPC_matrix; mean(PPC{i}(inds, :), 1)];  % averaging across phase bin indices
-% end
-% 
-% c1 = 1; 
-% c2 = 0;
-% c3 = 0; 
-% 
-% sem_plot(PPC_matrix,f,c1, c2, c3)
-% 
-% xlabel('Frequency (Hz)');
-% ylabel('Average PPC');
-% title('Average PPC with SEM');
+inds = [1:7, 18:20];
+PPC_matrix = [];
+for i = 1:length(PPC)
+    PPC_matrix = [PPC_matrix; mean(PPC{i}(inds, :), 1)];  % averaging across phase bin indices
+end
+
+c1 = 1; 
+c2 = 0;
+c3 = 0; 
+
+sem_plot(PPC_matrix,f,c1, c2, c3)
+
+xlabel('Frequency (Hz)');
+ylabel('Average PPC');
+title('Average PPC with SEM');
 %%
-% win = 1; 
-% 
-% semplot(PPC_matrix, f', win, c1, c2, c3);
-% xlabel('Frequency (Hz)');
-% ylabel('Average PPC');
-% title('Average PPC with SEM (PFC)');
-% grid on;
+win = 1; 
+
+semplot(PPC_matrix, f', win, c1, c2, c3);
+xlabel('Frequency (Hz)');
+ylabel('Average PPC');
+title('Average PPC with SEM (PFC)');
+grid on;
 %%
 samplingRate = 1250;
 num_bins = 20;
